@@ -14,14 +14,11 @@ class Problem9
       (2..999).each do |b|
         next if a > b
 
-        # ピタゴラス数判定
-        a = 3
-        b = 4
-        c = a + b
-        p 'ピタゴラス数'
+        c = a*a + b*b
+
         # 命題判定
-        if a + b + c == num
-          return a*b*c
+        if a + b + Math::sqrt(c) == num
+          return a*b*Math::sqrt(c).to_i
         end
       end
     end
