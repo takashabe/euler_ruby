@@ -52,17 +52,38 @@ class Problem8
     EOS
   end
 
-
   def solve(num)
-    extract(num)
+    max = 0
+
+    # 行を結合した文字列取得
+    source = getParsedSrc(num)
+
+    source.length.times {|i|
+      # 計算用の5文字取得
+      s = source[i, 5]
+
+      # 残りが5文字以下になれば終了
+      break if s.length < 5
+
+      # 積の計算
+      sum = 1
+      s.each_char {|c|
+        sum *= c.to_i
+      }
+
+      # 最大値の比較
+      max = sum if max < sum
+    }
+
+    max
   end
 
-  def extract(num)
-    parsedSrc = get_source.split("\n").map { |line|
+  def getParsedSrc(num)
+    get_source.split("\n").map { |line|
       line.strip
     }.join
   end
 end
 
 solve = Problem8.new
-solve.solve(5)
+p solve.solve(5)
