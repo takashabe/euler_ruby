@@ -20,7 +20,39 @@
 =end
 
 class Problem12
-  def solve()
+  def solve(n)
+    (1..Float::INFINITY).each do |i|
+      tri_number = get_triangular_number(i)
+      divisors = get_divisors(tri_number, tri_number)
+      p tri_number
+      p divisors
+      return tri_number if divisors >= n
+    end
+  end
 
+  # get divisors list
+  def get_divisors(n, target_div)
+    divisors = Array.new
+    sqrt_div = Math.sqrt(target_div)
+
+    # divisor list of [n] is a number to be divisible with natural number from (1 to √n) * 2.
+    (1..sqrt_div).each do |i|
+      divisors << i if (n % i) == 0
+    end
+
+    divisors.size * 2
+  end
+
+  # calc triangular number
+  # e.g. Triangular numbers 6 is the sum of natural number to triangular bottom 3.
+  def get_triangular_number(base)
+    tri_number = 0
+    (1..base).each do |i|
+      tri_number += i
+    end
+    tri_number
   end
 end
+
+solve = Problem12.new
+p solve.solve(500)
